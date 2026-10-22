@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a1425">
+  <meta name="description" content="ScaleDrive learns transferable representations for autonomous driving from action-free video latent prediction.">
+  <meta property="og:title" content="ScaleDrive — Action-Free Video Latent Prediction for Autonomous Driving">
+  <meta property="og:description" content="Scaling raw driving videos into transferable, frozen visual representations for end-to-end planning.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://tabguigui.github.io/ScaleDrive.github.io/assets/overview.webp">
+  <title>ScaleDrive | Action-Free Video Latent Prediction</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="video.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="ScaleDrive home"><span class="brand-mark" aria-hidden="true">S<span></span></span><span>ScaleDrive</span></a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+      <div class="nav-links" id="nav-links">
+        <a href="#overview">Overview</a><a href="#method">Method</a><a href="#results">Results</a><a href="#visualizations">Visualizations</a><a href="#videos">Videos</a>
+        <a class="nav-cta" href="https://github.com/TabGuigui/ScaleDrive.github.io" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="shell hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> RESEARCH PROJECT · ICLR 2027 SUBMISSION</div>
+          <h1>Learning to drive from <em>what happens next.</em></h1>
+          <p class="hero-subtitle">Scaling Action-Free Video Latent Prediction for Transferable Representations in End-to-End Autonomous Driving</p>
+          <p class="hero-description">ScaleDrive turns large-scale, unlabeled driving videos into a frozen visual representation that transfers across planners and driving benchmarks.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#videos">Watch the results <span aria-hidden="true">↘</span></a>
+            <a class="button button-outline" href="#overview">Explore the research <span aria-hidden="true">↘</span></a>
+          </div>
+          <p class="review-note">Anonymous authors · Paper under double-blind review</p>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-grid"></div>
+          <div class="road road-a"></div><div class="road road-b"></div><div class="road road-c"></div>
+          <div class="trajectory trajectory-a"></div><div class="trajectory trajectory-b"></div>
+          <div class="visual-chip chip-one">RAW VIDEO <span>01—08</span></div>
+          <div class="visual-chip chip-two">LATENT PREDICTION <span>→</span></div>
+          <div class="visual-chip chip-three">FROZEN ENCODER <span>✓</span></div>
+          <div class="visual-caption">From observed motion to transferable representation</div>
+        </div>
+      </div>
+      <div class="shell hero-stats" aria-label="Research highlights">
+        <div><strong>6M</strong><span>video clips for pretraining</span></div>
+        <div><strong>93.8</strong><span>NAVSIMv1 PDMS</span></div>
+        <div><strong>90.5</strong><span>NAVSIMv2 EPDMS</span></div>
+        <div><strong>4</strong><span>planner families evaluated</span></div>
+      </div>
+    </section>
+
+    <section class="section intro" id="overview">
+      <div class="shell">
+        <div class="section-heading"><span class="section-index">01 / THE IDEA</span><h2>Can raw driving video build a better planning representation?</h2><p>Most driving representations are shaped by task labels or actions. ScaleDrive studies whether predicting hidden video content in latent space can learn spatial and temporal cues that transfer to planning—without action annotations or benchmark-specific pretraining data.</p></div>
+        <div class="insight-grid">
+          <article class="insight"><span class="insight-icon">01</span><h3>Action-free pretraining</h3><p>Learn from internet open-world driving videos with no trajectory, action, or perception annotations.</p></article>
+          <article class="insight"><span class="insight-icon">02</span><h3>Predict in latent space</h3><p>Combine patch masking with complete temporal-slice masking to encourage scene structure and dynamics modeling.</p></article>
+          <article class="insight"><span class="insight-icon">03</span><h3>Freeze and transfer</h3><p>Keep the video encoder frozen when training downstream planners, exposing the value of the learned representation.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section method-section" id="method">
+      <div class="shell">
+        <div class="section-heading light"><span class="section-index">02 / THE METHOD</span><h2>Prediction as a route to understanding.</h2><p>A joint-embedding predictive architecture learns from visible video tokens and predicts masked spatiotemporal regions. The learned encoder is then reused across downstream driving policies.</p></div>
+        <figure class="figure-frame method-figure"><img src="assets/overview.webp" alt="ScaleDrive overview: action-free video pretraining, frozen representation transfer, and evaluation across driving benchmarks" loading="lazy"><figcaption>ScaleDrive framework and evaluation pipeline, adapted from the paper’s overview figure.</figcaption></figure>
+        <div class="method-steps"><div><span>01</span><strong>Observe</strong><p>Sample 4-second driving clips at 2 Hz from OpenDV-YouTube.</p></div><div><span>02</span><strong>Predict</strong><p>Infer masked patches and complete temporal slices in feature space.</p></div><div><span>03</span><strong>Transfer</strong><p>Discard the predictor, freeze the encoder, and train the planner.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section results" id="results">
+      <div class="shell">
+        <div class="section-heading"><span class="section-index">03 / SCALING &amp; RESULTS</span><h2>More video. Stronger transfer.</h2><p>With architecture and training budget held fixed, increasing the pretraining pool from 0.5M to 6M clips improves NAVSIMv1 PDMS from 92.77 to 93.61. Temporal-slice masking raises the final result to 93.79.</p></div>
+        <figure class="figure-frame results-figure"><img src="assets/scaling.webp" alt="Paper figure showing ScaleDrive data-scaling performance and command-wise planning gains" loading="lazy"><figcaption>Data scaling and command-wise gains from the paper. Higher PDMS is better.</figcaption></figure>
+        <div class="result-callout"><div><span class="tiny-label">FROZEN ENCODER · NAVSIMv1</span><strong>93.8 <small>PDMS</small></strong></div><p>ScaleDrive’s representation supports strong end-to-end planning while the pretrained video encoder remains frozen.</p></div>
+        <div class="table-head"><div><span class="section-index">CROSS-PLANNER TRANSFER</span><h3>One representation, multiple policy designs.</h3></div><p>PDMS on NAVSIMv1. Each ScaleDrive variant is compared with its own planner baseline.</p></div>
+        <div class="table-wrap"><table><thead><tr><th scope="col">Planner</th><th scope="col">Trajectory model</th><th scope="col">Baseline PDMS</th><th scope="col">With ScaleDrive</th><th scope="col">Gain</th></tr></thead><tbody><tr><th scope="row">LTF</th><td>Regression</td><td>83.8</td><td class="highlight">86.2</td><td class="gain">+2.4</td></tr><tr><th scope="row">DiffusionDrive</th><td>Diffusion</td><td>86.6</td><td class="highlight">88.1</td><td class="gain">+1.5</td></tr><tr><th scope="row">DrivoR</th><td>Regression</td><td>93.1</td><td class="highlight">93.4</td><td class="gain">+0.3</td></tr><tr><th scope="row">ChainFlow</th><td>Autoregressive</td><td>92.6</td><td class="highlight">93.2</td><td class="gain">+0.6</td></tr></tbody></table></div>
+        <p class="result-footnote">Additional evaluation in the paper covers NAVSIMv2, HUGSIM, and Bench2Drive under their respective protocols.</p>
+      </div>
+    </section>
+
+    <section class="section evidence" id="visualizations">
+      <div class="shell"><div class="section-heading"><span class="section-index">04 / INSIDE THE REPRESENTATION</span><h2>Motion and geometry emerge together.</h2><p>Frozen-encoder probes test what the representation contains. Ego-motion and monocular depth performance improve as action-free video pretraining scales.</p></div>
+        <figure class="figure-frame evidence-figure"><img src="assets/probes.webp" alt="Paper figure comparing ego-motion and monocular depth probes at different pretraining scales" loading="lazy"><figcaption>Frozen encoder probes for temporal dynamics and spatial geometry.</figcaption></figure>
+        <div class="section-heading qualitative-heading"><span class="section-index">QUALITATIVE RESULTS</span><h2>From representation to road behavior.</h2><p>Selected planning examples from NAVSIM, HUGSIM, and Bench2Drive illustrate the paper’s comparisons across driving scenarios.</p></div>
+        <figure class="figure-frame qualitative-figure"><img src="assets/qualitative.webp" alt="Qualitative planning examples from NAVSIM, HUGSIM, and Bench2Drive in the ScaleDrive paper" loading="lazy"><figcaption>Representative planning cases reproduced from the manuscript.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="section video-section" id="videos">
+      <div class="shell">
+        <div class="section-heading light"><span class="section-index">05 / CLOSED-LOOP VIDEO</span><h2>Watch the comparison.</h2><p>Paired clips from the research artifacts show ScaleDrive and the V-JEPA2 baseline in the same closed-loop scenes. Play each pair to inspect the behavior directly.</p></div>
+        <div class="video-pair-heading"><h3>Scene 001</h3><span>ScaleDrive vs. V-JEPA2</span></div>
+        <div class="video-grid"><figure><video controls playsinline preload="metadata" src="assets/video/scene01-scaledrive.mp4" aria-label="Scene 001 ScaleDrive closed-loop driving video"></video><figcaption><span class="video-key scaledrive-key"></span> ScaleDrive</figcaption></figure><figure><video controls playsinline preload="metadata" src="assets/video/scene01-vjepa2.mp4" aria-label="Scene 001 V-JEPA2 closed-loop driving video"></video><figcaption><span class="video-key baseline-key"></span> V-JEPA2 baseline</figcaption></figure></div>
+        <div class="video-pair-heading second-scene"><h3>Scene 004</h3><span>ScaleDrive vs. V-JEPA2</span></div>
+        <div class="video-grid"><figure><video controls playsinline preload="metadata" src="assets/video/scene04-scaledrive.mp4" aria-label="Scene 004 ScaleDrive closed-loop driving video"></video><figcaption><span class="video-key scaledrive-key"></span> ScaleDrive</figcaption></figure><figure><video controls playsinline preload="metadata" src="assets/video/scene04-vjepa2.mp4" aria-label="Scene 004 V-JEPA2 closed-loop driving video"></video><figcaption><span class="video-key baseline-key"></span> V-JEPA2 baseline</figcaption></figure></div>
+      </div>
+    </section>
+
+    <section class="closing"><div class="shell closing-inner"><div><span class="section-index">THE TAKEAWAY</span><h2>Driving video is a scalable source of transferable supervision.</h2><p>ScaleDrive shows that action-free latent prediction can strengthen frozen visual representations for end-to-end autonomous driving across policy architectures and evaluation environments.</p></div><a class="button button-light" href="https://github.com/TabGuigui/ScaleDrive.github.io" target="_blank" rel="noopener noreferrer">View on GitHub <span aria-hidden="true">↗</span></a></div></section>
+  </main>
+  <footer class="footer"><div class="shell footer-inner"><div class="brand footer-brand"><span class="brand-mark" aria-hidden="true">S<span></span></span><span>ScaleDrive</span></div><p>Research project page · Anonymous ICLR 2027 submission<br>Research only; not intended for direct safety-critical deployment.</p><a href="#top">Back to top ↑</a></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
