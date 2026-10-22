@@ -11,7 +11,7 @@
   <meta property="og:image" content="https://tabguigui.github.io/ScaleDrive.io/assets/overview.webp">
   <title>ScaleDrive | Academic Project Page</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -29,6 +29,13 @@
       </div>
     </section>
 
+    <section class="section band" id="abstract">
+      <div class="container prose">
+        <h2>Abstract</h2>
+        <p>End-to-end autonomous driving policies require effective visual representations that capture both spatial scene structure and temporal dynamics. Video latent prediction has emerged as an effective paradigm for learning spatiotemporal visual representations, yet it remains unclear whether scaling this objective with action-free driving videos can yield representations that benefit end-to-end planning. We study action-free video latent prediction as a scalable pretraining objective and introduce ScaleDrive, a driving-oriented framework pretrained exclusively on large-scale internet open-world driving videos, without action annotations or benchmark-specific data. We keep the pretrained video encoder frozen during downstream end-to-end planning training to isolate the transferability of representations learned from internet driving videos. Ego-motion and depth probes show that scaling action-free video pretraining progressively strengthens the temporal and geometric information encoded in the frozen representation. We systematically study the visual representation transfer across different end-to-end driving policies and closed-loop benchmarks, where ScaleDrive consistently improves downstream performance and demonstrates that scaling action-free video latent prediction yields representations that generalize across both planning policy architectures and evaluation scenarios and protocols.</p>
+      </div>
+    </section>
+
     <section class="teaser section-tight" aria-label="ScaleDrive overview">
       <div class="container wide">
         <figure>
@@ -38,23 +45,9 @@
       </div>
     </section>
 
-    <section class="section band" id="abstract">
-      <div class="container prose">
-        <h2>Abstract</h2>
-        <p>End-to-end autonomous driving policies require effective visual representations that capture both spatial scene structure and temporal dynamics. Video latent prediction has emerged as an effective paradigm for learning spatiotemporal visual representations, yet it remains unclear whether scaling this objective with action-free driving videos can yield representations that benefit end-to-end planning. We study action-free video latent prediction as a scalable pretraining objective and introduce ScaleDrive, a driving-oriented framework pretrained exclusively on large-scale internet open-world driving videos, without action annotations or benchmark-specific data. We keep the pretrained video encoder frozen during downstream end-to-end planning training to isolate the transferability of representations learned from internet driving videos. Ego-motion and depth probes show that scaling action-free video pretraining progressively strengthens the temporal and geometric information encoded in the frozen representation. We systematically study the visual representation transfer across different end-to-end driving policies and closed-loop benchmarks, where ScaleDrive consistently improves downstream performance and demonstrates that scaling action-free video latent prediction yields representations that generalize across both planning policy architectures and evaluation scenarios and protocols.</p>
-      </div>
-    </section>
-
-    <section class="section" id="method">
-      <div class="container prose">
-        <h2>Method</h2>
-        <p>ScaleDrive pretrains a video encoder on 6 million clips from open-world driving videos. Its latent prediction objective combines spatial patch masking and complete temporal-slice masking. For downstream planning, the pretrained video encoder is frozen while the planner is trained.</p>
-      </div>
-    </section>
-
     <section class="section band" id="results">
       <div class="container wide">
-        <h2>Results</h2>
+        <h2>Results comparison</h2>
         <p class="section-intro">Scaling action-free video pretraining improves downstream planning and transfers across policy architectures.</p>
         <figure class="research-figure">
           <img src="assets/scaling.webp" alt="Results figure showing the effect of video pretraining scale and command-wise performance" loading="lazy">
@@ -77,23 +70,7 @@
       </div>
     </section>
 
-    <section class="section" id="analysis">
-      <div class="container wide">
-        <h2>Representation analysis</h2>
-        <p class="section-intro">Frozen encoder probes examine the temporal and geometric information learned during pretraining.</p>
-        <figure class="research-figure">
-          <img src="assets/probes.webp" alt="Ego-motion and monocular depth probe results across pretraining scales" loading="lazy">
-          <figcaption>Ego-motion and monocular depth probes from the manuscript.</figcaption>
-        </figure>
-        <h3>Qualitative results</h3>
-        <figure class="research-figure">
-          <img src="assets/qualitative.webp" alt="Qualitative driving examples from the manuscript" loading="lazy">
-          <figcaption>Selected planning examples from NAVSIM, HUGSIM, and Bench2Drive.</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section class="section band" id="videos">
+    <section class="section" id="videos">
       <div class="container wide">
         <h2>Closed-loop videos</h2>
         <p class="section-intro">Paired clips compare ScaleDrive with the V-JEPA2 baseline in the same scenes.</p>
